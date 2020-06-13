@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'afisha',
     'places.apps.PlacesConfig',
-    'adminsortable2'
+    'adminsortable2',
+    'tinymce'
 ]
 
 MIDDLEWARE = [
