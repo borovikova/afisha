@@ -1,16 +1,16 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from adminsortable2.admin import SortableInlineAdminMixin
 from .models import Place, Image
 
 
-class ImageInline(admin.TabularInline):
+class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
     readonly_fields = ("preview",)
 
     def preview(self, obj):
         return format_html('<img src="{url}" height={height} />',
                            url=obj.file.url,
-                           # width=obj.headshot.width,
                            height=200
                            )
 

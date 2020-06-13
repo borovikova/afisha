@@ -17,7 +17,10 @@ class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE,
                               verbose_name="место, к которому относится картинка", related_name="images")
     file = models.ImageField(upload_to='images')
-    order = models.PositiveIntegerField(verbose_name="порядок отображения картинки")
+    order = models.PositiveIntegerField(default=0, blank=False, null=False, verbose_name="порядок отображения картинки")
 
     def __str__(self):
         return f"{self.order} {self.place.title}"
+
+    class Meta(object):
+        ordering = ['order']
