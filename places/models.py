@@ -3,8 +3,9 @@ from django.db import models
 
 class Place(models.Model):
     title = models.CharField(max_length=255, verbose_name='название места')
+    description_short = models.TextField(verbose_name='краткое описание')
+    description_long = models.TextField(verbose_name='полное описание')
     placeId = models.CharField(max_length=255, unique=True, verbose_name='уникальный идентификатор')
-    detailsUrl = models.URLField(verbose_name='ссылка на детальные данные')
     lat = models.FloatField(verbose_name='широта')
     lon = models.FloatField(verbose_name='долгота')
 
