@@ -13,6 +13,10 @@ class Place(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    class Meta(object):
+        verbose_name = "локация"
+        verbose_name_plural = "локации"
+
 
 class Image(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE,
