@@ -21,5 +21,4 @@ class PlaceAdmin(admin.ModelAdmin):
     ]
 
 
-admin.site.register(Image)
 admin.site.register(Place, PlaceAdmin)
