@@ -37,8 +37,8 @@ def place_detail_view(request, place_id):
     data = {
         'title': place.title,
         'imgs': [img.file.url for img in place.images.all()],
-        'description_short': place.description_short,
-        'description_long': place.description_long,
+        'short_description': place.short_description,
+        'long_description': place.long_description,
         'coordinates': {
             'lng': place.lon,
             'lon': place.lat
