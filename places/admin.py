@@ -10,7 +10,7 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
 
     def preview(self, obj):
         return format_html('<img src="{url}" height={height} />',
-                           url=obj.file.url,
+                           url=obj.file.url if obj.file else None,
                            height=200
                            )
 
