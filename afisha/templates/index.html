@@ -210,7 +210,7 @@
             marker.on('click', function (event) {
                 log.debug('Feature selected', geoJsonPoint);
                 sidebar.show();
-                loadPlaceInfo(geoJsonPoint.properties.place_id, geoJsonPoint.properties.detailsUrl);
+                loadPlaceInfo(geoJsonPoint.properties.placeId, geoJsonPoint.properties.detailsUrl);
             });
             return marker;
         }

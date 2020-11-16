@@ -22,7 +22,7 @@ def show_map(request):
             },
             'properties': {
                 'title': place.title,
-                'place_id': place.id,
+                'placeId': place.id,
                 'detailsUrl': reverse('place-detail', args=[place.id])
             }
         }
