@@ -69,6 +69,7 @@
 
             <img v-if="mainPhotoSrc" v-bind:src="mainPhotoSrc" class="d-block shadow mb-3 rounded"
                  v-bind:alt="selectedPlace.title">
+
             <h5 class="mb-3">{% verbatim %}{{ selectedPlace.title }}{% endverbatim %}</h5>
 
             <p>{% verbatim %}{{ selectedPlace.short_description }}{% endverbatim %}</p>
