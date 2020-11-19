@@ -25,7 +25,7 @@ class Command(BaseCommand):
             'title': data.get('title', ''),
             'short_description': data.get('description_short', ''),
             'long_description': data.get('description_long', ''),
-            'placeId': place_id
+            'place_id': place_id
         }
         place, created = Place.objects.get_or_create(**place_data)
         return place
