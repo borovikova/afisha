@@ -23,8 +23,8 @@ class Command(BaseCommand):
             'lon': data.get('coordinates', {}).get('lng', 0),
             'lat': data.get('coordinates', {}).get('lat', 0),
             'title': data.get('title', ''),
-            'description_short': data.get('description_short', ''),
-            'description_long': data.get('description_long', ''),
+            'short_description': data.get('description_short', ''),
+            'long_description': data.get('description_long', ''),
             'placeId': place_id
         }
         place, created = Place.objects.get_or_create(**place_data)
