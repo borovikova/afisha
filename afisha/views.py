@@ -1,12 +1,11 @@
 from django.http import HttpResponse, JsonResponse
 from django.template import loader
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from places.models import Place
 
 
 def show_map(request):
-    template = loader.get_template('index.html')
     context = {'data': {
         'type': 'FeatureCollection',
         'features': []
@@ -27,9 +26,7 @@ def show_map(request):
             }
         }
         context['data']['features'].append(feature)
-
-    rendered_page = template.render(context, request)
-    return HttpResponse(rendered_page)
+    return render(request, 'index.html', context)
 
 
 def place_detail_view(request, place_id):
