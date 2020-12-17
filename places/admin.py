@@ -6,7 +6,7 @@ from .models import Place, Image
 
 class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     model = Image
-    readonly_fields = ("preview",)
+    readonly_fields = ["preview"]
 
     def preview(self, obj):
         return format_html('<img src="{url}" height={height} />',
