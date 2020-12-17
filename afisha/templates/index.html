@@ -64,15 +64,14 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-
+        {% verbatim %}
         <div class="place-description" v-if="selectedPlace">
 
             <img v-if="mainPhotoSrc" v-bind:src="mainPhotoSrc" class="d-block shadow mb-3 rounded"
                  v-bind:alt="selectedPlace.title">
 
-            <h5 class="mb-3">{% verbatim %}{{ selectedPlace.title }}{% endverbatim %}</h5>
-
-            <p>{% verbatim %}{{ selectedPlace.short_description }}{% endverbatim %}</p>
+            <h5 class="mb-3">{{ selectedPlace.title }}</h5>
+            <p>{{ selectedPlace.short_description }}</p>
 
             <div id="place-photos" class="carousel slide mb-3 shadow" data-ride="carousel" data-interval="5000">
                 <ol class="carousel-indicators">
@@ -98,7 +97,7 @@
                     </a>
                 </template>
             </div>
-
+            {% endverbatim %}
             <div v-html="selectedPlace.long_description"></div>
         </div>
     </div>
