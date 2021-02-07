@@ -23,16 +23,16 @@ class Command(BaseCommand):
             'short_description': data['description_short'],
             'long_description': data['description_long'],
         }
-        place, created = Place.objects.get_or_create(title=data.get('title', ''), defaults=place_data)
+        place, created = Place.objects.get_or_create(
+            title=data.get('title', ''), defaults=place_data)
         return place
 
-    def save_place_images(self, photos_links, place):
-        for link in photos_links:
-            img = Image.objects.create(place=place)
-            response = requests.get(link)
-            response.raise_for_status()
-            file_content = response.content
-            img.file.save(os.path.basename(urlparse(link).path), BytesIO(file_content))
+    def save_place_image(self, link, place):
+        img = Image.objects.create(place=place)
+        response = requests.get(link)
+        response.raise_for_status()
+        file_content = response.content
+        img.file.save(os.path.basename(urlparse(link).path), BytesIO(file_content))
         return None
 
     def handle(self, *args, **options):
@@ -42,4 +42,8 @@ class Command(BaseCommand):
         data = response.json()
         place = self.save_place(data)
         photos_links = data.get('imgs', [])
-        self.save_place_images(photos_links, place)
+        for link in photos_links:
+            try:
+                self.save_place_image(link, place)
+            except requests.exceptions.HTTPError:
+                print(f"Can't load image {link}")
