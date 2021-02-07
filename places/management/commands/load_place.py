@@ -17,16 +17,11 @@ class Command(BaseCommand):
                             help='Link to .json file to parse')
 
     def save_place(self, data):
-        lon = data.get('coordinates', {}).get('lng', 0)
-        lat = data.get('coordinates', {}).get('lat', 0)
-        if lon == lat == 0:
-            raise Exception("Coordinates are not valid")
-
         place_data = {
-            'lon': lon,
-            'lat': lat,
-            'short_description': data.get('description_short', ''),
-            'long_description': data.get('description_long', ''),
+            'lon': data['coordinates']['lng'],
+            'lat': data['coordinates']['lat'],
+            'short_description': data['description_short'],
+            'long_description': data['description_long'],
         }
         place, created = Place.objects.get_or_create(title=data.get('title', ''), defaults=place_data)
         return place
