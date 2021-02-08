@@ -16,17 +16,6 @@ class Command(BaseCommand):
                             type=str,
                             help='Link to .json file to parse')
 
-    def save_place(self, raw_place):
-        place_data = {
-            'lon': raw_place['coordinates']['lng'],
-            'lat': raw_place['coordinates']['lat'],
-            'short_description': raw_place['description_short'],
-            'long_description': raw_place['description_long'],
-        }
-        place, created = Place.objects.get_or_create(
-            title=raw_place.get('title', ''), defaults=place_data)
-        return place
-
     def save_place_image(self, link, place):
         img = Image.objects.create(place=place)
         response = requests.get(link)
@@ -40,7 +29,16 @@ class Command(BaseCommand):
         response = requests.get(options['url'])
         response.raise_for_status()
         raw_place = response.json()
-        place = self.save_place(raw_place)
+
+        place_data = {
+            'lon': raw_place['coordinates']['lng'],
+            'lat': raw_place['coordinates']['lat'],
+            'short_description': raw_place['description_short'],
+            'long_description': raw_place['description_long'],
+        }
+        place, created = Place.objects.get_or_create(
+            title=raw_place.get('title', ''), defaults=place_data)
+
         photos_links = raw_place.get('imgs', [])
         for link in photos_links:
             try:
