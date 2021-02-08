@@ -11,14 +11,12 @@ class ImageInline(SortableInlineAdminMixin, admin.TabularInline):
     def preview(self, obj):
         if obj.file:
             return format_html('<img src="{url}" height={height} />',
-                               url=obj.file.url if obj.file else None,
-                               height=200
-                               )
+                               url=obj.file.url, height=200)
         return format_html('Здесь будет превью, когда вы выберете файл')
 
 
 class PlaceAdmin(admin.ModelAdmin):
-    inlines = [ImageInline,]
+    inlines = [ImageInline, ]
     search_fields = ['title']
 
 
